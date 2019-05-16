@@ -1,0 +1,98 @@
+
+        # No labels, use only features.
+    dataset = tf.data.Dataset.from_tensor_slices((dict(features), labels))
+    dataset = dataset.shuffle(1000).repeat().batch(batch_size)
+#     implemented using the `Dataset` class.
+TEST_URL = "http://download.tensorflow.org/data/iris_test.csv"
+SPECIES = ['Setosa', 'Versicolor', 'Virginica']
+    fields = tf.decode_csv(line, record_defaults=CSV_TYPES)
+    label = features.pop('Species')
+    return features, label
+
+
+    dataset = dataset.shuffle(1000).repeat().batch(batch_size)
+
+def eval_input_fn(features, labels, batch_size):
+# `tf.parse_csv` sets the types of the outputs to match the examples given in
+    test_path = tf.keras.utils.get_file(TEST_URL.split('/')[-1], TEST_URL)
+CSV_TYPES = [[0.0], [0.0], [0.0], [0.0], [0]]
+
+
+
+
+    dataset = tf.data.Dataset.from_tensor_slices(inputs)
+
+
+    """Returns the iris dataset as (train_x, train_y), (test_x, test_y)."""
+
+    dataset = dataset.map(_parse_line)
+import pandas as pd
+    # Batch the examples
+
+    return dataset
+        inputs = (features, labels)
+    return train_path, test_path
+    features = dict(features)
+
+    # Convert the inputs to a Dataset.
+    # Return the dataset.
+def _parse_line(line):
+    print('train_y:', train_y)
+    return dataset
+
+TRAIN_URL = "http://download.tensorflow.org/data/iris_training.csv"
+
+
+
+def train_input_fn(features, labels, batch_size):
+    # Convert the inputs to a Dataset.
+    # Parse each line.
+
+    # Shuffle, repeat, and batch the examples.
+
+
+    # Create a dataset containing the text lines.
+CSV_COLUMN_NAMES = ['SepalLength', 'SepalWidth',
+
+    dataset = tf.data.TextLineDataset(csv_path).skip(1)
+    dataset = dataset.batch(batch_size)
+    assert batch_size is not None, "batch_size must not be None"
+#     the `record_defaults` argument.
+    # Pack the result into a dictionary
+import tensorflow as tf
+    return dataset
+
+
+    train_x, train_y = train, train.pop(y_name)
+    test = pd.read_csv(test_path, names=CSV_COLUMN_NAMES, header=0)
+    # Separate the label from the features
+def maybe_download():
+# The remainder of this file contains a simple example of a csv parser,
+    # Return the dataset.
+    # Shuffle, repeat, and batch the examples.
+    train = pd.read_csv(train_path, names=CSV_COLUMN_NAMES, header=0)
+    else:
+
+    train_path = tf.keras.utils.get_file(TRAIN_URL.split('/')[-1], TRAIN_URL)
+
+def load_data(y_name='Species'):
+        inputs = features
+
+    print('train_x:', train_x)
+def csv_input_fn(csv_path, batch_size):
+    """An input function for evaluation or prediction"""
+    train_path, test_path = maybe_download()
+
+                    'PetalLength', 'PetalWidth', 'Species']
+
+
+
+    return (train_x, train_y), (test_x, test_y)
+
+    # Decode the line into its fields
+    # Return the dataset.
+    test_x, test_y = test, test.pop(y_name)
+    if labels is None:
+    features = dict(zip(CSV_COLUMN_NAMES, fields))
+    """An input function for training"""
+
